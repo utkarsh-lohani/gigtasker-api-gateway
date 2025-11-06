@@ -1,4 +1,4 @@
-package com.gigtasker.api_gateway;
+package com.gigtasker.apigateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
