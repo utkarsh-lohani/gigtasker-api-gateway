@@ -1,4 +1,3 @@
-````markdown
 # 🚀 GigTasker API Gateway
 
 This service is the **"Front Door"** (or "Switchboard Operator") for the entire GigTasker microservice platform. It is the single, public-facing entry point for all incoming requests from the `gigtasker-ui` (Angular) frontend.
@@ -40,7 +39,6 @@ On startup, it connects to the `config-server` (using its `bootstrap.yml`) and f
 1.  `application.yml` (for the global Eureka address)
 2.  `api-gateway.yml` (for its base routes and CORS config)
 3.  `api-gateway-local.yml` (for the `local` profile-specific overrides)
-4.  `api-gateway-prod.yml` (for the `prod` for Prod Configuration)
 
 ### Example Route (from `api-gateway.yml`)
 ```yaml
@@ -61,28 +59,3 @@ spring:
                 - Path=/api/users/**
               filters:
                 - RewritePath=/api/users(?<segment>/?.*), /api/v1/users$\{segment}
-````
-
------
-
-## 🚀 How to Run
-
-1.  **Start Dependencies (CRITICAL):**
-
-    * Run `docker-compose up -d` (for Postgres, Rabbit, Keycloak).
-    * Start the `config-server`.
-    * Start the `service-registry`.
-
-2.  **Run this Service:**
-    Once the config and registry are running, you can start this service.
-
-    ```bash
-    # From your IDE, run ApiGatewayApplication.java
-    # Or, from the command line:
-    java -jar target/api-gateway-0.0.1.jar
-    ```
-
-This service will start on port **`9090`** (as defined in your `config-repo`). All frontend requests from `http://localhost:4200` should be directed to this port.
-
-```
-```
