@@ -18,17 +18,16 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         http
-                // 1. Disable CSRF (Fixes 403 Forbidden on Login POST)
-                .csrf(ServerHttpSecurity.CsrfSpec::disable)
+            // 1. Disable CSRF (Fixes 403 Forbidden on Login POST)
+            .csrf(ServerHttpSecurity.CsrfSpec::disable)
 
-                // 2. Enable CORS (Fixes Preflight errors)
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            // 2. Enable CORS (Fixes Preflight errors)
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
-                // 3. Allow EVERYTHING (The Gateway just routes traffic)
-                // Validation happens at the Microservice level (User, Task, etc.)
-                .authorizeExchange(exchange -> exchange
-                        .anyExchange().permitAll()
-                );
+            // 3. Allow EVERYTHING (The Gateway just routes traffic)
+            // Validation happens at the Microservice level (User, Task, etc.)
+            .authorizeExchange(exchange -> exchange.anyExchange().permitAll()
+            );
 
         return http.build();
     }
